@@ -8,7 +8,7 @@ import (
 	"path"
 	"time"
 
-	"github.com/pranavraja/tldr/lib/tldr/entity"
+	"github.com/mdaguete/tldr/lib/tldr/entity"
 )
 
 var ErrTooOld = errors.New("Cached file is too old")

@@ -5,18 +5,20 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/pranavraja/tldr/lib/tldr"
-	"github.com/pranavraja/tldr/lib/tldr/entity"
+	"github.com/mdaguete/tldr/lib/tldr"
+	"github.com/mdaguete/tldr/lib/tldr/entity"
 )
 
-func NewRemoteRepository(remote string) *Repository {
+func NewRemoteRepository(remote string, remoteIndex string) *Repository {
 	return &Repository{
-		remote: remote,
+		remote:      remote,
+		remoteIndex: remoteIndex,
 	}
 }
 
 type Repository struct {
-	remote string
+	remote      string
+	remoteIndex string
 }
 
 // Caller must close the response body after reading.
@@ -31,19 +33,19 @@ func (f *Repository) Page(page, platform string) (entity.Page, error) {
 	}
 	if resp.StatusCode != 200 {
 		resp.Body.Close()
-		return nil, fmt.Errorf("Unexpected status code: %d", resp.StatusCode)
+		return nil, fmt.Errorf("Unexpected status code getting %s: %d", page, resp.StatusCode)
 	}
 	return NewRemotePage(resp.Body), nil
 }
 
 func (f *Repository) Index() (entity.Index, error) {
-	resp, err := http.Get(f.remote + "/index.json")
+	resp, err := http.Get(f.remoteIndex)
 	if err != nil {
 		return nil, err
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != 200 {
-		return nil, fmt.Errorf("Unexpected status code: %d", resp.StatusCode)
+		return nil, fmt.Errorf("Unexpected status code getting index [ %s ]: %d", f.remoteIndex, resp.StatusCode)
 	}
 	data := struct {
 		Commands []struct {

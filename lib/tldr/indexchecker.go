@@ -1,6 +1,6 @@
 package tldr
 
-import "github.com/pranavraja/tldr/lib/tldr/entity"
+import "github.com/mdaguete/tldr/lib/tldr/entity"
 
 func NewIndexCheckerRepository(repository entity.Repository) *IndexCheckerRepository {
 	return &IndexCheckerRepository{

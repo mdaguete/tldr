@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/pranavraja/tldr/lib/tldr"
+	"github.com/mdaguete/tldr/lib/tldr"
 )
 
 func TestRender(t *testing.T) {

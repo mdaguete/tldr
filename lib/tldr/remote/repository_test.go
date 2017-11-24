@@ -7,8 +7,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/pranavraja/tldr/lib/tldr/entity"
-	"github.com/pranavraja/tldr/lib/tldr/remote"
+	"github.com/mdaguete/tldr/lib/tldr/entity"
+	"github.com/mdaguete/tldr/lib/tldr/remote"
 )
 
 var repository entity.Repository

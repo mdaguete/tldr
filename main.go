@@ -9,13 +9,14 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/pranavraja/tldr/lib/tldr"
-	"github.com/pranavraja/tldr/lib/tldr/cache"
-	"github.com/pranavraja/tldr/lib/tldr/entity"
-	"github.com/pranavraja/tldr/lib/tldr/remote"
+	"github.com/mdaguete/tldr/lib/tldr"
+	"github.com/mdaguete/tldr/lib/tldr/cache"
+	"github.com/mdaguete/tldr/lib/tldr/entity"
+	"github.com/mdaguete/tldr/lib/tldr/remote"
 )
 
 var remoteAddress string = "https://raw.github.com/tldr-pages/tldr/master/pages"
+var remoteIndex string = "https://tldr-pages.github.io/assets/index.json"
 
 func main() {
 	err := run()
@@ -39,7 +40,7 @@ func run() error {
 	}
 
 	var repository entity.Repository
-	repository = remote.NewRemoteRepository(remoteAddress)
+	repository = remote.NewRemoteRepository(remoteAddress, remoteIndex)
 	repository = cache.NewFileSystemCacheRepository(repository, path.Join(usr.HomeDir, ".tldr"), time.Hour*24)
 	repository = tldr.NewIndexCheckerRepository(repository)
 
